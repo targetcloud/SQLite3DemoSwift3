@@ -16,7 +16,8 @@ class SQLite3Tool: NSObject {
     override init() {
         super.init()
         //        let path = "/Users/targetcloud/Desktop/appdb.sqlite"//实际中用下面的path
-        let docDir: String! = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
+        let docDir: String! = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory,
+                                                                  FileManager.SearchPathDomainMask.userDomainMask, true).first
         //        let path = docDir + "/appdb.sqlite"//建议下面写法
         //        print(path)
         let DBPath = (docDir! as NSString).appendingPathComponent("appdb.sqlite")
@@ -27,7 +28,8 @@ class SQLite3Tool: NSObject {
         */
         if  sqlite3_open(path, &appdb) == SQLITE_OK {
             dropTable("t_user")
-            createTable("create table if not exists t_user(id integer primary key autoincrement, name text not null, age integer, score real default 60, money real default 100 )")
+            createTable("create table if not exists t_user(id integer primary key autoincrement," + 
+                "name text not null, age integer, score real default 60, money real default 100 )")
         }else {
             print("open fail")
         }
@@ -57,7 +59,7 @@ class SQLite3Tool: NSObject {
                     print(columnName,value)
                 }
                 if type == SQLITE_TEXT {
-                    let value =  String(cString:sqlite3_column_text(stmt, i)!)
+                    let value =  String(cString:sqlite3_column_text(stmt, i)!)//MARK:-最新写法
                     let valueStr = String(cString: value, encoding: String.Encoding.utf8)
                     dict[columnName!] = valueStr
                     print(columnName,valueStr)

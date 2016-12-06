@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let userArr = User.allUserFromDB()
         print(userArr)
-        timeLabel.text = "你查询到了 \(userArr?.count) 条记录"
+        timeLabel.text = "你查询到了 \(userArr!.count) 条记录"
     }
 
     //事务测试1
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
             return array
         })
         let endTime = CFAbsoluteTimeGetCurrent()
-        timeLabel.text = "开事务+Batch\(endTime - beginTime)"
+        timeLabel.text = "开事务+Batch>\(endTime - beginTime)"
     }
     
     //查询测试1

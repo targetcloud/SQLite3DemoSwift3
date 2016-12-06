@@ -118,20 +118,23 @@ class User: NSObject {
     
     //插入方式2
     class func insertBatch(_ valuesBlock: @escaping () -> (Array<Array<Any>>)){
-        SQLite3Tool.shareInstance.insertBatch("t_user", columnNameArray: ["name", "score","age"], valuesBlock: { () -> Array<Array<Any>> in
+        SQLite3Tool.shareInstance.insertBatch("t_user", columnNameArray: ["name", "score","age"],
+                                              valuesBlock: { () -> Array<Array<Any>> in
             return valuesBlock()
         })
     }
     
     //插入方式1
     func insert(){
-        if  SQLite3Tool.shareInstance.insert("t_user", columnNameArray: ["name", "score","age"], valueArray: [self.name, self.score,self.age]){
+        if  SQLite3Tool.shareInstance.insert("t_user", columnNameArray: ["name", "score","age"],
+                                             valueArray: [self.name, self.score,self.age]){
             print("insert success")
         }
     }
     
     func insert2(){
-        if  SQLite3Tool.shareInstance.insert("t_user", columnNameArray: ["name", "score","age"], values: self.name, self.score,self.age){
+        if  SQLite3Tool.shareInstance.insert("t_user", columnNameArray: ["name", "score","age"],
+                                             values: self.name, self.score,self.age){
             print("insert2 success")
         }
     }
